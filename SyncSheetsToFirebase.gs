@@ -5,7 +5,7 @@
  * @todo Fix for if empty sheet and if empty spreadsheet.
  */
 
-var secret = 'xQYU0abpTPFWM4It0nZK5lTmHP9tw2xVBBHiEwh0'
+var secret = 'xQYU0abpTPFWM4It0nZK5lTmHP9tw2xVBBHiEwh0' // no longer active
 
 /**
  * Create firebase URL for passed path.
