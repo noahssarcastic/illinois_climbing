@@ -36,23 +36,23 @@
 	   */
 	  snapshot.forEach(function(tableSnapshot){
 	    if(!tableSnapshot.exists()) { return; }
-		content += '<h1>' + tableSnapshot.key + '</h1>'; 	// table title
+		content += '<h1>' + tableSnapshot.key + '</h1>'; 	                        // table title
 		content += '<table>'; 								// table begins
 		
 		/**
-	     * Calls function for every row in the current table and formats the HTML table row.
+	         * Calls function for every row in the current table and formats the HTML table row.
 		 * @param {DataSnapshot} rowSnapshot - DataSnapshot of the current row
-	     */
+	         */
 		tableSnapshot.forEach(function(rowSnapshot){
 		  if(!rowSnapshot.exists()) { return; }
 		  content += '<tr>'; 								// row begins
 		  var header = false;
-		  if(rowSnapshot.key == 0) { header = true; }		// header row support
+		  if(rowSnapshot.key == 0) { header = true; }		                        // header row support
 		  
 		  /**
-	       * Calls function for every datum of the current row and formats the HTML cell.
+	           * Calls function for every datum of the current row and formats the HTML cell.
 		   * @param {DataSnapshot} dataSnapshot - DataSnapshot of the current cell
-	       */
+	           */
 		  rowSnapshot.forEach(function(dataSnapshot){
 		    if(!dataSnapshot.exists()||dataSnapshot.val()==null) { return; }
 		    if(header){ content += '<th>' + dataSnapshot.val() + '</th>'; }
