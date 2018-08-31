@@ -2,17 +2,17 @@
  * Utility functions for uploading google sheets data to firebase.
  *
  * @author Noah Iniguez
- * @todo Fix for if empty sheet and if empty spreadsheet.
+ * @todo 
  */
 
-var secret = 'xQYU0abpTPFWM4It0nZK5lTmHP9tw2xVBBHiEwh0' // no longer active
+var secret = 'addRealSecretHere'  // add real secret here
 
 /**
  * Create firebase URL for passed path.
  * @param {string} jsonPath - Path extension for gear-catalogue database.
  */
 function getPathUrl(jsonPath) { 
-  return 'https://gear-catalogue.firebaseio.com/' + jsonPath + '.json?auth=' + secret 
+  return 'https://gear-catalogue.firebaseio.com/current/' + jsonPath + '.json?auth=' + secret 
 }
 
 /**
@@ -20,9 +20,11 @@ function getPathUrl(jsonPath) {
  * @param {Sheet} sheet - Sheet to be uploaded.
  */
 function syncSheet(sheet) {
-  var [rows, columns] = [sheet.getLastRow(), sheet.getLastColumn()]
   var path = sheet.getSheetName()
-  var data = sheet.getRange(1,1,rows,columns).getValues()
+  if (path=='Main') { return }
+  var [rows, columns] = [sheet.getLastRow(), sheet.getLastColumn()]
+  if (rows==0) { return }
+  var data = sheet.getRange(1,1,rows,columns).getValues() 
   var options = {
     method: 'put',
     contentType: 'application/json',
@@ -37,8 +39,9 @@ function syncSheet(sheet) {
  */
 function startSync() {
   var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets()
-  for(var i = 0; i < sheets.length; i++) {
-    var currentSheet = sheets[i];
-    syncSheet(currentSheet);
+  for (var i = 0; i < sheets.length; i++) {
+    var currentSheet = sheets[i]
+    //if(isSheetEmpty(currentSheet)) { return }
+    syncSheet(currentSheet)
   }
 }
