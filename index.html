@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+<script>
+var config = {
+  apiKey: "AIzaSyCpfpRAi_SsGZ3-zoCg0l5SzBsDg_xCGx8",
+  authDomain: "gear-catalogue.firebaseapp.com",
+  databaseURL: "https://gear-catalogue.firebaseio.com",
+  projectId: "gear-catalogue",
+  storageBucket: "gear-catalogue.appspot.com",
+  messagingSenderId: "329733455911"
+};
+firebase.initializeApp(config);
+</script>
+  
+<script>
+var gear = firebase.database().ref();
+	
+gear.on('value', function(snapshot) { 
+  $('#ex-table').html('');
+  if(!snapshot.exists()) { return; }
+  var content = '';
+  snapshot.forEach(function(tableSnapshot){
+    if(!tableSnapshot.exists()) { return; }
+    content += '<h1>' + tableSnapshot.key + '</h1>'; 	                        
+    content += '<table>'; 								
+		
+    tableSnapshot.forEach(function(rowSnapshot){
+      if(!rowSnapshot.exists()) { return; }
+      content += '<tr>'; 								
+      var header = false;
+      if(rowSnapshot.key == 0) { header = true; }		                        
+		  
+      rowSnapshot.forEach(function(dataSnapshot){
+	if(!dataSnapshot.exists()||dataSnapshot.val()==null) { return; }
+	if(header){ content += '<th>' + dataSnapshot.val() + '</th>'; 
+	} else { content += '<td>' + dataSnapshot.val() + '</td>'; }
+      });
+		  
+      content += '</tr>'; 								
+    });
+		
+    content += '</table>'; 								
+  });
+		
+  $('#ex-table').append(content);
+});
+</script>
+
+<style>
+table { border-collapse: collapse; }
+table, th, td { border: 3px solid black; }
+table { width: 80%; }
+</style>
+</head>
+
+<body>
+	
+<div id="ex-table">Custom HTML</div>
+	
+</body>
