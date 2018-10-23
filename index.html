@@ -17,7 +17,7 @@ firebase.initializeApp(config);
 </script>
   
 <script>
-var gear = firebase.database().ref();
+var gear = firebase.database().ref('gear-catalogue/current');
 	
 gear.on('value', function(snapshot) { 
   $('#ex-table').html('');
