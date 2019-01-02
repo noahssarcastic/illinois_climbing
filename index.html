@@ -27,7 +27,7 @@ gear.on('value', function(snapshot) {
     if(!tableSnapshot.exists()) { return; }
     if(tableSnapshot.key==='time') {
       var d = new Date();
-      var timeStamp = d.toLocaleTimeString(tableSnapshot.val())
+      var timeStamp = d.toLocaleString(tableSnapshot.val())
       content += 'Last Updated: ' + timeStamp;
       return; 
     }
