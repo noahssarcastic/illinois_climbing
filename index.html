@@ -54,7 +54,7 @@ gear.on('value', function(snapshot) {
 var gear = firebase.database().ref('current');
 	
 gear.on('value', function(snapshot) { 
-  document.querySelector('#ex-table').html('');
+  document.querySelector('#ex-table').innerhtml = '';
   if(!snapshot.exists()) { return; }
   var content = '';
   snapshot.forEach(function(tableSnapshot){
