@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
 <script>
@@ -15,40 +15,6 @@ var config = {
 };
 firebase.initializeApp(config);
 </script>
-  
-<!-- <script>
-var gear = firebase.database().ref('current');
-	
-gear.on('value', function(snapshot) { 
-  $('#ex-table').html('');
-  if(!snapshot.exists()) { return; }
-  var content = '';
-  snapshot.forEach(function(tableSnapshot){
-    if(!tableSnapshot.exists()) { return; }
-    content += '<h1>' + tableSnapshot.key + '</h1>'; 	                        
-    content += '<table>'; 								
-		
-    tableSnapshot.forEach(function(rowSnapshot){
-      if(!rowSnapshot.exists()) { return; }
-      content += '<tr>'; 								
-      var header = false;
-      if(rowSnapshot.key == 0) { header = true; }		                        
-		  
-      rowSnapshot.forEach(function(dataSnapshot){
-	if(!dataSnapshot.exists()||dataSnapshot.val()==null) { return; }
-	if(header){ content += '<th>' + dataSnapshot.val() + '</th>'; 
-	} else { content += '<td>' + dataSnapshot.val() + '</td>'; }
-      });
-		  
-      content += '</tr>'; 								
-    });
-		
-    content += '</table>'; 								
-  });
-		
-  $('#ex-table').append(content);
-});
-</script> -->
 	
 <script>
 var gear = firebase.database().ref('current');
