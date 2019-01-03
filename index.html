@@ -47,7 +47,7 @@ gear.on('value', function (snapshot) {
     tableSnapshot.forEach(function (rowSnapshot) {
       if (!rowSnapshot.exists()) { return; }
 	    
-      var header = false;
+      var headers = false;
       if (rowSnapshot.key == 0) { header = true; }	
       
       if (!header) {
