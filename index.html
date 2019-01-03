@@ -46,6 +46,10 @@ gear.on('value', function (snapshot) {
       if (!rowSnapshot.exists()) { return; }
 	    
       let pageItem = document.createElement('li');
+      pageList.appendChild(pageItem);
+	    
+      let itemList = document.createElement('ul');
+
 	    
       var header = false;
       if (rowSnapshot.key == 0) { header = true; }		                        
@@ -54,17 +58,23 @@ gear.on('value', function (snapshot) {
 	if (!dataSnapshot.exists()||dataSnapshot.val()==null) { return; }
 	      
 	if (header) { 
-		content += '<th>' + dataSnapshot.val() + '</th>'; 
+	
+          let itemTitle = document.createElement('h2');
+	  itemTitle.innerHTML = dataSnapshot.val();
+	  
+	  
 	} else { 
 		content += '<td>' + dataSnapshot.val() + '</td>'; 
 	}
       }); 								
     });	
+	  
     content.appendChild(pageTitle);
     content.appendChild(pageList);
   });	
+	
   let noscript = document.querySelector('#ex-table');
-  noscript.innerhtml = '';
+  noscript.innerhtml = '';  // need to change how this is handled for progen
   noscript.appendChild(content);
 });
 </script>
