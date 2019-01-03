@@ -50,6 +50,8 @@ gear.on('value', function (snapshot) {
       var header = false;
       if (rowSnapshot.key == 0) { header = true; }	
       
+      let itemTitle, itemList, pageItem
+	    
       if (!header) {
         let pageItem = document.createElement('li');
         pageList.appendChild(pageItem);
@@ -99,6 +101,6 @@ table { width: 80%; }
 
 <body>
 	
-<div id="ex-table">Custom HTMLv0.2</div>
+<div id="ex-table">Custom HTMLv0.3</div>
 	
 </body>
