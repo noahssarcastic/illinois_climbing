@@ -64,7 +64,7 @@ gear.on('value', function (snapshot) {
         if (!dataSnapshot.exists()||dataSnapshot.val()==null) { return; }
 
         if (header) { 
-          headers.append(dataSnapshot.val());
+          headers.push(dataSnapshot.val());
         } else { 
           if (dataSnapshot.key == 0) { 
             itemTitle.innerHTML = dataSnapshot.val(); 
@@ -99,6 +99,6 @@ table { width: 80%; }
 
 <body>
 	
-<div id="ex-table">Custom HTML</div>
+<div id="ex-table">Custom HTMLv0.1</div>
 	
 </body>
