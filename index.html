@@ -47,7 +47,7 @@ gear.on('value', function (snapshot) {
     tableSnapshot.forEach(function (rowSnapshot) {
       if (!rowSnapshot.exists()) { return; }
 	    
-      var headers = false;
+      var header = false;
       if (rowSnapshot.key == 0) { header = true; }	
       
       if (!header) {
@@ -99,6 +99,6 @@ table { width: 80%; }
 
 <body>
 	
-<div id="ex-table">Custom HTMLv0.1</div>
+<div id="ex-table">Custom HTMLv0.2</div>
 	
 </body>
