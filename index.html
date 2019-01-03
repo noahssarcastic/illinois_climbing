@@ -31,7 +31,7 @@ gear.on('value', function (snapshot) {
       let date = new Date();
       let timeStamp = d.toLocaleString(tableSnapshot.val())
       let lastUpdate = document.createElement('p');
-      lastUpdate.innerHTML = Last Updated: ' + timeStamp;
+      lastUpdate.innerHTML = 'Last Updated: ' + timeStamp;
       lastUpdate.id = 'time-stamp';
       content.insertBefore(lastUpdate, content.firstChild);
       return; 
