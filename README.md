@@ -1,1 +1,1 @@
-https://noahssarcastic.github.io/Gear-Catalogue/index
+https://noahssarcastic.github.io/illinois-climbing/
