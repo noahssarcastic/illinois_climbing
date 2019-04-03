@@ -1,106 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
-<script>
-var config = {
-  apiKey: "AIzaSyCpfpRAi_SsGZ3-zoCg0l5SzBsDg_xCGx8",
-  authDomain: "gear-catalogue.firebaseapp.com",
-  databaseURL: "https://gear-catalogue.firebaseio.com",
-  projectId: "gear-catalogue",
-  storageBucket: "gear-catalogue.appspot.com",
-  messagingSenderId: "329733455911"
-};
-firebase.initializeApp(config);
-</script>
-	
-<script>
-var gear = firebase.database().ref('current');
-	
-gear.on('value', function (snapshot) { 
-  if (!snapshot.exists()) { return; }
-	
-  let content = document.createElement('div');
-	
-  snapshot.forEach(function (tableSnapshot) {
-    if (!tableSnapshot.exists()) { return; }
-	  
-    if (tableSnapshot.key==='time') {
-      let date = new Date();
-      let timeStamp = d.toLocaleString(tableSnapshot.val())
-      let lastUpdate = document.createElement('p');
-      lastUpdate.innerHTML = 'Last Updated: ' + timeStamp;
-      lastUpdate.id = 'time-stamp';
-      content.insertBefore(lastUpdate, content.firstChild);
-      return; 
-    }
-	
-    let pageTitle = document.createElement('h1');
-    pageTitle.innerHTML = tableSnapshot.key;
-    
-    let pageList = document.createElement('ul'); 	                         								
-    
-    let headers = [];
-    
-    tableSnapshot.forEach(function (rowSnapshot) {
-      if (!rowSnapshot.exists()) { return; }
-	    
-      var header = false;
-      if (rowSnapshot.key == 0) { header = true; }	
-      
-      var itemTitle, itemList, pageItem
-	    
-      if (!header) {
-        let pageItem = document.createElement('li');
-        pageList.appendChild(pageItem);
-
-        let itemTitle = document.createElement('h2');
-        pageItem.appendChild(itemTitle);
-        let itemList = document.createElement('ul');
-        pageItem.appendChild(itemList);
-      }
-		  
-      rowSnapshot.forEach(function (dataSnapshot) {
-        if (!dataSnapshot.exists()||dataSnapshot.val()==null) { return; }
-
-        if (header) { 
-          headers.push(dataSnapshot.val());
-        } else { 
-          if (dataSnapshot.key == 0) { 
-            itemTitle.innerHTML = dataSnapshot.val(); 
-          } else {
-            let data = document.createElement('li');
-            data.innerHTML = dataSnapshot.val();
-            let dataTitle = document.createElement('h3');
-            dataTitle.innerHTML = header[dataSnapshot.key];
-            data.insertBefore(dataTitle, data.firstChild);
-            itemList.appendChild(data);
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyCpfpRAi_SsGZ3-zoCg0l5SzBsDg_xCGx8",
+        authDomain: "gear-catalogue.firebaseapp.com",
+        databaseURL: "https://gear-catalogue.firebaseio.com",
+        projectId: "gear-catalogue",
+        storageBucket: "gear-catalogue.appspot.com",
+        messagingSenderId: "329733455911"
+      };
+      firebase.initializeApp(config);
+      var gear = firebase.database().ref('current');
+      gear.on('value', function (snapshot) {
+        if (!snapshot.exists()) { return; }
+        let content = document.createElement('div');
+        snapshot.forEach(function (tableSnapshot) {
+          if (!tableSnapshot.exists()) { return; }
+          if (tableSnapshot.key==='time') {
+            let date = new Date();
+            let timeStamp = d.toLocaleString(tableSnapshot.val())
+            let lastUpdate = document.createElement('p');
+            lastUpdate.innerHTML = 'Last Updated: ' + timeStamp;
+            lastUpdate.id = 'time-stamp';
+            content.insertBefore(lastUpdate, content.firstChild);
+            return;
           }
-        }
-      }); 								
-    });	
-	  
-    content.appendChild(pageTitle);
-    content.appendChild(pageList);
-  });	
-	
-  let noscript = document.querySelector('#ex-table');
-  noscript.innerhtml = '';  // need to change how this is handled for progen
-  noscript.appendChild(content);
-});
-</script>
-
-<style>
-table { border-collapse: collapse; }
-table, th, td { border: 3px solid black; }
-table { width: 80%; }
-</style>
-</head>
-
-<body>
-	
-<div id="ex-table">Custom HTMLv0.4</div>
-	
-</body>
+          let pageTitle = document.createElement('h1');
+          pageTitle.innerHTML = tableSnapshot.key;
+          let pageList = document.createElement('ul');
+          let headers = [];
+          tableSnapshot.forEach(function (rowSnapshot) {
+            if (!rowSnapshot.exists()) { return; }
+            var header = false;
+            if (rowSnapshot.key == 0) { header = true; }
+            var itemTitle, itemList, pageItem
+            if (!header) {
+              let pageItem = document.createElement('li');
+              pageList.appendChild(pageItem);
+              let itemTitle = document.createElement('h2');
+              pageItem.appendChild(itemTitle);
+              let itemList = document.createElement('ul');
+              pageItem.appendChild(itemList);
+            }
+            rowSnapshot.forEach(function (dataSnapshot) {
+              if (!dataSnapshot.exists()||dataSnapshot.val()==null) { return; }
+              if (header) {
+                headers.push(dataSnapshot.val());
+              } else {
+                if (dataSnapshot.key == 0) {
+                  itemTitle.innerHTML = dataSnapshot.val();
+                } else {
+                  let data = document.createElement('li');
+                  data.innerHTML = dataSnapshot.val();
+                  let dataTitle = document.createElement('h3');
+                  dataTitle.innerHTML = header[dataSnapshot.key];
+                  data.insertBefore(dataTitle, data.firstChild);
+                  itemList.appendChild(data);
+                }
+              }
+            });
+          });
+          content.appendChild(pageTitle);
+          content.appendChild(pageList);
+        });
+        let noscript = document.querySelector('#ex-table');
+        noscript.innerhtml = '';  // need to change how this is handled for progen
+        noscript.appendChild(content);
+      });
+    </script>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      table, th, td {
+        border: 3px solid black;
+      }
+      table {
+        width: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ex-table">Custom HTMLv0.4</div>
+  </body>
+</html>
